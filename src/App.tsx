@@ -135,89 +135,24 @@ const TodoApp = () => {
 
 
   const showDoneTasks = () => {
-    return tasks.filter(task => task.finished === true).map(({ name, finished, edit, editValue }, index) => {
-      return (
-        <div key={index} className="todo-app__task">
-
-          {!edit ? (<div>
-            <input
-
-              checked={finished}
-              onChange={() => finishedChangeHandler(index)}
-              className="todo-app__checkbox"
-              type="checkbox"
-              id={`${index}`} />
-            <label
-              className={`todo-app__text ${finished && 'todo-app__text--finished'}`}
-              htmlFor={`${index}`}>
-              {name}
-            </label>
-          </div>)
-            : (<input
-              value={editValue}
-              type="text"
-              onChange={(e) => editInputHandler(e, index)}
-
-            />)
-          }
-
-          {!edit ?
-            <button onClick={() => editButton(index)} >Edit</button>
-            : <button onClick={(e) => saveButton(index)} >Save</button>}
-          {!edit ?
-            <button onClick={() => deleteButton(index)} >Delete</button>
-            : <button onClick={() => cancelButton(index)} >Cancel</button>}
-          <button onClick={() => copyButton(index)}>Copy</button>
-
-
-
-        </div>
-      )
+    return tasks.map((task, i) => {
+      if  (task.finished) {
+        return showAllTasks()[i]
+      }
+      
     })
+    
   }
 
 
 
 
   const showUndoneTasks = () => {
-    return tasks.filter(task => task.finished !== true).map(({ name, finished, edit, editValue }, index) => {
-      return (
-        <div key={index} className="todo-app__task">
-
-          {!edit ? (<div>
-            <input
-
-              checked={finished}
-              onChange={() => finishedChangeHandler(index)}
-              className="todo-app__checkbox"
-              type="checkbox"
-              id={`${index}`} />
-            <label
-              className={`todo-app__text ${finished && 'todo-app__text--finished'}`}
-              htmlFor={`${index}`}>
-              {name}
-            </label>
-          </div>)
-            : (<input
-              value={editValue}
-              type="text"
-              onChange={(e) => editInputHandler(e, index)}
-
-            />)
-          }
-
-          {!edit ?
-            <button onClick={() => editButton(index)} >Edit</button>
-            : <button onClick={(e) => saveButton(index)} >Save</button>}
-          {!edit ?
-            <button onClick={() => deleteButton(index)} >Delete</button>
-            : <button onClick={() => cancelButton(index)} >Cancel</button>}
-          <button onClick={() => copyButton(index)}>Copy</button>
-
-
-
-        </div>
-      )
+    return tasks.map((task, i) => {
+      if  (!task.finished) {
+        return showAllTasks()[i]
+      } 
+      
     })
   }
 
